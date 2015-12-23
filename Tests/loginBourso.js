@@ -15,7 +15,7 @@ viewportSize: {
 var utils = require('utils');
 var fs = require('fs');
 
-var cookieFilename = "./tomsGuideCookies.json";
+var cookieFilename = "./boursoCookies.json";
 
 if (fs.exists(cookieFilename)) {
   console.log("setting cookies");
@@ -38,14 +38,9 @@ if (casper.cli.has('password')) {
 
 casper.echo("Login = " + login + ", Password = " + password)
 
-casper.start('http://www.tomsguide.fr/');
+casper.start('https://www.boursorama.com/connexion.phtml');
 
-casper.waitUntilVisible('#usrSignin', function clickOnConnect() {
-    this.mouseEvent('mouseover', '#usrSignin');
-    this.click('#usrSignin');
-});
-
-casper.waitUntilVisible('.login-form', function fillLoginFields() {
+casper.waitUntilVisible('#form-membre', function fillLoginFields() {
   this.fillSelectors('.login-form', {
     'input[name="username"]':    login,
     'input[name="password"]':    password
